@@ -30,13 +30,16 @@
                         <th>Name</th>
                         <th>Code</th>
                         <th>Price</th>
+                        <th>Rating</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let products of product | ProductFilter:filterData" > 
                         <!--have to repeat row-->
                         <td>
-                            <img [src]="products.imgUrl" *ngIf="showImage">
+                            <!-- to dynamically embedd the style using property -->
+                            <img src={{products.imageUrl}} *ngIf="showImage" [style.width.px]="styleWidth">
+
                         </td>
                         <td>
                             {{products.productId}} 
@@ -49,6 +52,9 @@
                         </td>
                         <td>
                             {{products.price}}                 
+                        </td>
+                        <td>
+                            <star-comp [rating]="products.starrating"></star-comp>
                         </td>
 
                     </tr>

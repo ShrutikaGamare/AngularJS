@@ -8,12 +8,14 @@ import { log } from 'util';
 })
 
 export class ProductFilterPipe implements PipeTransform
-{
+{   //value is my array
     transform(value:IProduct[],filterBy:string):IProduct[]
     {
         filterBy = filterBy?filterBy.toLowerCase():null
        
-        /* I need to learn this */
+        /* I need to learn this */ 
+
+        //product is my array
         return filterBy? value.filter((product:IProduct)=>
         product.productName.toLowerCase().indexOf(filterBy)!==-1):value
 

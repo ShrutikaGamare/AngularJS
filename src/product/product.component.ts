@@ -1,41 +1,42 @@
-import {Component} from '@angular/core';
+import {Component,OnInit} from '@angular/core';
 import {IProduct} from './product.model';
-
+import {ProductService} from './product.service';
 
 @Component({
 selector:'product-comp',
-templateUrl:`./product.component.html`
+templateUrl:`./product.component.html`,
+//styles:['thead{color:red}','h3{color:green}']
+
+//if you have mutliple css files to apply
+styleUrls:['./product.component.css']
 })
 
 
-export class ProductComponent
+export class ProductComponent implements OnInit
 {
     title:string="ShrutikaGamare";
-    showImage:boolean=false;
+    showImage:boolean=true;
     filterData:string="";
-    product:IProduct[]=[
-        {
-            "productId":1,
-            "productName":"Leaf rake",
-            "productCode":"GDN 001",
-            "price":19.8,
-            "imgUrl":"./assets/leaf-rake.jpg"
+    //styleWidth=100;
+    product:IProduct[];
+    errorMessage:string;
 
-        },
-        {
-            "productId":2,
-            "productName":"garden cart",
-            "productCode":"GDN 002",
-            "price":21,
-            "imgUrl":"./assets/garden-cart.jpg"
+    constructor(private _productService:ProductService){
 
+    }
 
-        }
-    ];
 
     toggleImage():void
     {
         this.showImage=!this.showImage;
+    }
+
+
+    ngOnInit():void{
+        this._productService.getProducts()
+        .subscribe((data)=>this.product=data,
+        (err)=>this.errorMessage=err)
+         
     }
 
 }

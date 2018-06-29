@@ -11,5 +11,6 @@ export interface IProduct
     productName:string,
     productCode:string,
     price:number,
-    imgUrl:string
+    imageUrl:string,
+    starrating:number
 }
